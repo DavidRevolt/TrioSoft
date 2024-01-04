@@ -100,6 +100,9 @@ fun HomeScreen(
                 .padding(innerPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Button(onClick = viewModel::deleteAllPoints) {
+                Text(text = "Delete All")
+            }
             when (uiState) {
                 is HomeUiState.Data -> {
                     val data = (uiState as HomeUiState.Data)

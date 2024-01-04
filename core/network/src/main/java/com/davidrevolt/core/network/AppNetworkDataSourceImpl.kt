@@ -37,4 +37,5 @@ class AppNetworkDataSourceImpl @Inject constructor(private val firestore: Fireba
         }
         Log.i("AppLog", "Network module is created point Successfully")
     }
+
 }

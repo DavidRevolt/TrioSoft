@@ -11,7 +11,6 @@ import com.davidrevolt.database.dao.PointDao
 import com.davidrevolt.database.model.PointEntity
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.onEach
 import java.util.Date
 import javax.inject.Inject
 
@@ -26,10 +25,6 @@ class PointRepositoryImpl @Inject constructor(
     override fun getPoints(): Flow<List<Point>> =
         pointDao.getPointEntities(userId = userId)
             .map { it.map(PointEntity::asExternalModel) }
-
-    /*    override fun getPoints(): Flow<List<Point>> =
-            networkDataSource.getPoints(userId)
-                .map { it.map { networkPoint -> networkPoint.asExternalModel() } }*/
 
 
     override suspend fun create(
@@ -48,10 +43,16 @@ class PointRepositoryImpl @Inject constructor(
     }
 
     override suspend fun sync() {
-        Log.d("AppLog","Syncing")
-        networkDataSource.getPoints(userId).collect { it->
-            it.map { pointDao.upsert(it.asEntity()) }
+        Log.d("AppLog", "Syncing")
+        networkDataSource.getPoints(userId).collect { it ->
+            it.map {
+                Log.d("AppLog","Got Point ${it.id} from db, upsert in dao")
+                pointDao.upsert(it.asEntity()) }
+        }
     }
-    }
+
+    override suspend fun deleteAllPoints() =
+
+        pointDao.deleteAllPoints()
 
 }

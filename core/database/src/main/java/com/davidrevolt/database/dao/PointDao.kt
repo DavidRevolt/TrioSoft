@@ -16,4 +16,7 @@ interface PointDao{
     @Upsert
     suspend fun upsert(pointEntity: PointEntity)
 
+    @Query("DELETE FROM point")
+    suspend fun deleteAllPoints()
+
 }

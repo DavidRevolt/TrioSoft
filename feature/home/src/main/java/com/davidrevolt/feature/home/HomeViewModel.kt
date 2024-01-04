@@ -51,6 +51,12 @@ class HomeViewModel @Inject constructor(
             _isRefreshing.value=false
         }
     }
+
+    fun deleteAllPoints(){
+        viewModelScope.launch {
+            pointRepository.deleteAllPoints()
+        }
+    }
 }
 
 sealed interface HomeUiState {
