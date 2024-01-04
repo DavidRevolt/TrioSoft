@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.davidrevolt.core.data.utils.authentication.AuthenticationService
+import com.davidrevolt.core.data.utils.snackbarmanager.SnackbarManager
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class SignUpViewModel @Inject constructor(
-    private val authenticationService: AuthenticationService
+    private val authenticationService: AuthenticationService,
+    private val snackbarManager: SnackbarManager
 ) : ViewModel() {
 
     val authState = authenticationService.authState().map { it }
@@ -30,6 +32,7 @@ class SignUpViewModel @Inject constructor(
                 Log.i("AppLog", "User Signed Up")
             } catch (e: Exception) {
                 Log.e("AppLog", "${e.message}")
+                snackbarManager.snackbarMessage("${e.message}")
             }
         }
     }

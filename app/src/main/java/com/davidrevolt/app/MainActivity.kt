@@ -8,6 +8,7 @@ import androidx.core.view.WindowCompat
 import com.davidrevolt.app.ui.App
 import com.davidrevolt.app.ui.theme.AppTheme
 import com.davidrevolt.core.data.utils.authentication.AuthenticationService
+import com.davidrevolt.core.data.utils.snackbarmanager.SnackbarManager
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 import javax.inject.Inject
@@ -18,6 +19,9 @@ class MainActivity : ComponentActivity() {
 
     @Inject
     lateinit var authenticationService: AuthenticationService
+
+    @Inject
+    lateinit var snackbarManager: SnackbarManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,8 +36,11 @@ class MainActivity : ComponentActivity() {
                 val configuration = resources.configuration
                 configuration.setLocale(locale)
                 resources.updateConfiguration(configuration, resources.displayMetrics)
-                LocalContext.provides( context.createConfigurationContext(configuration))
-                App(authenticationService = authenticationService)
+                LocalContext.provides(context.createConfigurationContext(configuration))
+                App(
+                    authenticationService = authenticationService,
+                    snackbarManager = snackbarManager
+                )
             }
         }
     }

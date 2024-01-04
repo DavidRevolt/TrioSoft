@@ -1,6 +1,5 @@
 package com.davidrevolt.app.ui
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
@@ -11,9 +10,6 @@ import com.davidrevolt.core.data.utils.authentication.AuthenticationService
 import com.davidrevolt.feature.home.navigateToHome
 import com.davidrevolt.feature.login.navigateToLogin
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 @Composable
@@ -22,7 +18,11 @@ fun rememberAppState(
     navController: NavHostController = rememberNavController(),
     coroutineScope: CoroutineScope = rememberCoroutineScope()
 ): AppState {
-    return remember(authenticationService, navController, coroutineScope) {
+    return remember(
+        authenticationService,
+        navController,
+        coroutineScope
+    ) {
         AppState(
             authenticationService,
             navController,
@@ -38,7 +38,8 @@ class AppState(
 ) {
     val userLoggedIn = authenticationService.userLoggedIn
 
-    fun signOut(){
+
+    fun signOut() {
         coroutineScope.launch {
             authenticationService.signOut()
             onAuthStateChangeNavigation()

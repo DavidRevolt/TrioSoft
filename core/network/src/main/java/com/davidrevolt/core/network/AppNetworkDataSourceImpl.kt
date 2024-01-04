@@ -1,6 +1,5 @@
 package com.davidrevolt.core.network
 
-import android.health.connect.datatypes.units.Temperature
 import android.util.Log
 import com.davidrevolt.core.network.model.NetworkPoint
 import com.google.firebase.firestore.FirebaseFirestore

@@ -4,6 +4,8 @@ import com.davidrevolt.core.data.repository.PointRepository
 import com.davidrevolt.core.data.repository.PointRepositoryImpl
 import com.davidrevolt.core.data.utils.authentication.AuthenticationService
 import com.davidrevolt.core.data.utils.authentication.AuthenticationServiceImpl
+import com.davidrevolt.core.data.utils.snackbarmanager.SnackbarManager
+import com.davidrevolt.core.data.utils.snackbarmanager.SnackbarManagerImpl
 import com.google.firebase.Firebase
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.auth
@@ -25,6 +27,9 @@ abstract class DataModule {
 
     @Binds
     abstract fun bindsAuthenticationService(authenticationServiceImpl: AuthenticationServiceImpl): AuthenticationService
+
+    @Binds
+    abstract fun bindsSnackbarManager(snackbarManagerImpl: SnackbarManagerImpl): SnackbarManager
 
     companion object {
         @Provides

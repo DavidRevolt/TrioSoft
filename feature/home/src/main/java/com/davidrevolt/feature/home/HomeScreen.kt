@@ -44,10 +44,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.davidrevolt.core.designsystem.colors.blackScrim
 import com.davidrevolt.core.designsystem.components.AppFabButton
 import com.davidrevolt.core.designsystem.components.AppSlider
-import com.davidrevolt.core.designsystem.components.LoadingIndicator
 import com.davidrevolt.core.designsystem.components.LoadingWheel
 import com.davidrevolt.core.designsystem.components.PointColumn
 import com.davidrevolt.core.designsystem.icons.AppIcons
+import com.davidrevolt.core.designsystem.isSyncing.IsSyncing
+import com.davidrevolt.core.designsystem.isSyncing.rememberIsSyncingState
 import com.davidrevolt.core.model.Point
 import com.davidrevolt.feature.home.chart.PointChart
 import java.text.SimpleDateFormat
@@ -100,19 +101,13 @@ fun HomeScreen(
                 .padding(innerPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button(onClick = viewModel::deleteAllPoints) {
-                Text(text = "Delete All")
-            }
             when (uiState) {
                 is HomeUiState.Data -> {
                     val data = (uiState as HomeUiState.Data)
                     if (data.points.isNotEmpty())
-                        HomeScreenContent(data.points)
+                        HomeScreenContent(data.points,data.isSyncing)
                     else
                         Text("Nothing to show here...yet", color = Color.White)
-
-                    if (data.isRefreshing)
-                        LoadingIndicator()
                 }
 
                 is HomeUiState.Loading -> LoadingWheel()
@@ -122,33 +117,39 @@ fun HomeScreen(
 }
 
 @Composable
-private fun HomeScreenContent(points: List<Point>) {
+private fun HomeScreenContent(points: List<Point>, isSyncing:Boolean) {
     val yearFormat = SimpleDateFormat("yyyy", Locale.US)
     val dayMonthFormat = SimpleDateFormat("MMM d", Locale.US)
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(top = 30.dp),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
+    IsSyncing(
+        state = rememberIsSyncingState(isRefreshing = isSyncing),
+        onRefresh = {},
     ) {
-        // Cards
-        Card(colors = CardDefaults.cardColors(containerColor = blackScrim)) {
-            LazyRow(modifier = Modifier.padding(10.dp)) {
-                points.forEach { point ->
-                    item {
-                        PointColumn(
-                            modifier = Modifier.padding(3.dp),
-                            dayMonth = dayMonthFormat.format(point.date),
-                            year = yearFormat.format(point.date),
-                            temp = point.temperature,
-                            humidity = point.humidity
-                        )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 30.dp),
+            verticalArrangement = Arrangement.Center,
+            horizontalAlignment = Alignment.CenterHorizontally,
+        ) {
+            // Cards
+            Card(colors = CardDefaults.cardColors(containerColor = blackScrim)) {
+                LazyRow(modifier = Modifier.padding(10.dp)) {
+                    points.forEach { point ->
+                        item {
+                            PointColumn(
+                                modifier = Modifier.padding(3.dp),
+                                dayMonth = dayMonthFormat.format(point.date),
+                                year = yearFormat.format(point.date),
+                                temp = point.temperature,
+                                humidity = point.humidity
+                            )
+                        }
                     }
                 }
             }
+            PointChart(points)
+
         }
-        PointChart(points)
     }
 }
 

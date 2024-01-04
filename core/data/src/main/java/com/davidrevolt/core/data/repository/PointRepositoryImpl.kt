@@ -43,16 +43,15 @@ class PointRepositoryImpl @Inject constructor(
     }
 
     override suspend fun sync() {
-        Log.d("AppLog", "Syncing")
+        Log.d("AppLog", "Point repository is syncing")
         networkDataSource.getPoints(userId).collect { it ->
             it.map {
-                Log.d("AppLog","Got Point ${it.id} from db, upsert in dao")
+                Log.d("AppLog","Got Point ${it.id} from firestore/firestore cache, upsert in dao")
                 pointDao.upsert(it.asEntity()) }
         }
     }
 
     override suspend fun deleteAllPoints() =
-
         pointDao.deleteAllPoints()
 
 }

@@ -8,7 +8,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
-import com.davidrevolt.core.designsystem.icons.AppIcons
 
 @Composable
 fun AppFabButton(onFabClick: () -> Unit, icon: ImageVector, modifier: Modifier = Modifier, containerColor: Color = FloatingActionButtonDefaults.containerColor) {

@@ -1,7 +1,6 @@
 package com.davidrevolt.database.converter
 
 import androidx.room.TypeConverter
-import java.time.Instant
 import java.util.Date
 
 class DateConverter {
