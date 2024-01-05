@@ -1,5 +1,6 @@
 # TriSoft App - Firebase integrated
 Example of Android app built entirely with Kotlin and Jetpack Compose.
+
 The app follows the [official architecture guidance](https://developer.android.com/jetpack/guide) as closely as possible.
 
 
@@ -42,4 +43,5 @@ To install this app, follow these steps:
 
 ## Modularization
 App modularization approach is very similar to [Now in Android](https://github.com/android/nowinandroid/) App which developed by google.
+
 To learn more about this approach check out [modularization learning journey](https://github.com/android/nowinandroid/blob/main/docs/ArchitectureLearningJourney.md)
