@@ -8,7 +8,7 @@ The app follows the [official architecture guidance](https://developer.android.c
 *   Users can add new points.
 *   Points being displayed on a graph.
 *   Points data saved on both local and remote DB .
-*   Get the current weather for the city Rehovot, IL.
+*   Get the current weather for Rehovot, IL.
 
 ### Highlights
 * **MVVM** architecture.
@@ -36,6 +36,5 @@ To install this app, follow these steps:
 1. Clone or download the project code from the repository.
 2. Create Firebase project, download and place google-services.json file in App module.
 3. In Firebase console, enable: Authentication and Cloud Firestore.
-   [rules and how to add SHA-1](https://github.com/DavidRevolt/Qwitter/blob/master/docs/SetupRequirementGuides.md)
-5. Get [MetaSource](https://www.meteosource.com/) api key and place it in [RetrofitAppNetwork.kt] (https://github.com/DavidRevolt/Qwitter/blob/master/docs/SetupRequirementGuides.md).
-6. Build and run the app on an Android emulator or device.
+4. Get [MetaSource](https://www.meteosource.com/) api key and place it in [RetrofitAppNetwork.kt] (https://github.com/DavidRevolt/TrioSoft/blob/master/core/network/src/main/java/com/davidrevolt/core/network/retrofit/RetrofitAppNetwork.kt)
+5. Build and run the app on an Android emulator or device.
