@@ -36,5 +36,5 @@ To install this app, follow these steps:
 1. Clone or download the project code from the repository.
 2. Create Firebase project, download and place google-services.json file in App module.
 3. In Firebase console, enable: Authentication and Cloud Firestore.
-4. Get [MetaSource](https://www.meteosource.com/) api key and place it in [RetrofitAppNetwork.kt] (https://github.com/DavidRevolt/TrioSoft/blob/master/core/network/src/main/java/com/davidrevolt/core/network/retrofit/RetrofitAppNetwork.kt)
+4. Get [MetaSource](https://www.meteosource.com/) api key and insert it in [RetrofitAppNetwork.kt](https://github.com/DavidRevolt/TrioSoft/blob/master/core/network/src/main/java/com/davidrevolt/core/network/retrofit/RetrofitAppNetwork.kt).
 5. Build and run the app on an Android emulator or device.
