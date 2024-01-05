@@ -1,7 +1,6 @@
 # TriSoft App - Firebase integrated
-Example of Android app built entirely with Kotlin and Jetpack Compose.
+Example of Android app built entirely with Kotlin and Jetpack Compose, the app follows the [official architecture guidance](https://developer.android.com/jetpack/guide) as closely as possible.
 
-The app follows the [official architecture guidance](https://developer.android.com/jetpack/guide) as closely as possible.
 
 
 ### Features
