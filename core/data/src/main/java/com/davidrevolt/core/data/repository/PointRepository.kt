@@ -14,5 +14,5 @@ interface PointRepository {
     )
 
     suspend fun sync()
-    suspend fun deleteAllPoints()
+
 }

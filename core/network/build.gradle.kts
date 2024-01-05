@@ -42,6 +42,8 @@ dependencies {
 
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.firestore)
+    implementation(libs.retrofit)
+    implementation(libs.retrofitGsonConverter)
 
     implementation(libs.core.ktx)
     testImplementation(libs.junit)

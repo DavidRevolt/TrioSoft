@@ -7,6 +7,7 @@
 
     <!-- ADDED HiltApp [The HiltApp.kt class] For HILT-->
     <application
+        android:usesCleartextTraffic="true"
         android:name=".HiltApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"

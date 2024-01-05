@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.davidrevolt.core.data.repository.PointRepository
+import com.davidrevolt.core.data.repository.WeatherRepository
 import com.davidrevolt.core.data.utils.snackbarmanager.SnackbarManager
 import com.davidrevolt.core.model.Point
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -18,6 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val pointRepository: PointRepository,
+    private val weatherRepository: WeatherRepository,
     private val snackbarManager: SnackbarManager
 ) : ViewModel() {
 
@@ -52,6 +54,18 @@ class HomeViewModel @Inject constructor(
                 snackbarManager.snackbarMessage("${e.message}")
             }
             _isRefreshing.value = false
+        }
+    }
+
+    fun getWeatherByPlace(placeId: String) {
+        viewModelScope.launch {
+            try{
+                var test = weatherRepository.getWeatherByPlace(placeId)
+                Log.d("AppLog","Got: $test")
+            }catch (e:Exception){
+                Log.d("AppLog","exception")
+
+            }
         }
     }
 }

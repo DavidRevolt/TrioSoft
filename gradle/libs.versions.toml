@@ -9,26 +9,23 @@ lifecycle-runtime-ktx = "2.6.2"
 activity-compose = "1.8.2"
 compose-bom = "2023.10.01"
 
-# Hilt
+
 hilt = "2.48"
 hiltCompiler = "1.1.0"
 hiltNavigationCompose = "1.1.0"
-
-# ROOM
 room = "2.6.1"
 ksp = "1.9.21-1.0.15"
-
-# FireBase
 google-services = "4.4.0"
 firebase-bom = "32.7.0"
-
 androidxNavigation = "2.7.6"
 androidx-lifecycle = "2.7.0-rc02"
-
 number-picker-ver ="1.0.3"
 vico = "1.13.1"
+retrofit = "2.9.0"
 appcompat = "1.6.1"
 material = "1.11.0"
+
+
 
 [libraries]
 core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "core-ktx" }
@@ -56,6 +53,10 @@ androidx-hilt-navigation-compose = { group = "androidx.hilt", name = "hilt-navig
 # Navigation
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "androidxNavigation" }
 
+# Retrofit
+retrofit = { group = "com.squareup.retrofit2", name = "retrofit", version.ref = "retrofit" }
+retrofitGsonConverter = { group = "com.squareup.retrofit2", name = "converter-gson", version.ref = "retrofit" }
+
 # ROOM
 room = { group = "androidx.room", name = "room-ktx", version.ref = "room" }
 roomCompiler = { group = "androidx.room", name = "room-compiler", version.ref = "room" }
@@ -68,13 +69,15 @@ firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" }
 
 
-# Others
-androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
-numpicker = { group = "com.chargemap.compose", name = "numberpicker", version.ref = "number-picker-ver" }
-
+# Chart
 vico-compose = { group = "com.patrykandpatrick.vico", name = "compose", version.ref = "vico" }
 vico-compose-m3 = { group = "com.patrykandpatrick.vico", name = "compose-m3", version.ref = "vico" }
 vico-core = { group = "com.patrykandpatrick.vico", name = "core", version.ref = "vico" }
+
+
+# Others
+androidx-lifecycle-runtime-compose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "androidx-lifecycle" }
+numpicker = { group = "com.chargemap.compose", name = "numberpicker", version.ref = "number-picker-ver" }
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 

@@ -108,6 +108,9 @@ fun HomeScreen(
                         HomeScreenContent(data.points,data.isSyncing)
                     else
                         Text("Nothing to show here...yet", color = Color.White)
+                    Button(onClick = {viewModel.getWeatherByPlace("rehovot")}){
+                        Text("Test")
+                    }
                 }
 
                 is HomeUiState.Loading -> LoadingWheel()
