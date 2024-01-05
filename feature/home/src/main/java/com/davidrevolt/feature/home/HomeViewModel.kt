@@ -15,6 +15,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 import java.util.Date
 import javax.inject.Inject
+import kotlin.text.Typography.degree
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
@@ -60,11 +61,10 @@ class HomeViewModel @Inject constructor(
     fun getWeatherByPlace(placeId: String) {
         viewModelScope.launch {
             try{
-                var test = weatherRepository.getWeatherByPlace(placeId)
-                Log.d("AppLog","Got: $test")
+                val weather = weatherRepository.getWeatherByPlace(placeId)
+                snackbarManager.snackbarMessage("The weather is $placeId is ${weather.description} ${weather.temperature}+$degree")
             }catch (e:Exception){
-                Log.d("AppLog","exception")
-
+                snackbarManager.snackbarMessage("${e.message}")
             }
         }
     }
