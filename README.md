@@ -38,3 +38,8 @@ To install this app, follow these steps:
 3. In Firebase console, enable: Authentication and Cloud Firestore.
 4. Get [MetaSource](https://www.meteosource.com/) api key and insert it in [RetrofitAppNetwork.kt](https://github.com/DavidRevolt/TrioSoft/blob/master/core/network/src/main/java/com/davidrevolt/core/network/retrofit/RetrofitAppNetwork.kt).
 5. Build and run the app on an Android emulator or device.
+
+
+## Modularization
+App modularization approach is very similar to [Now in Android](https://github.com/android/nowinandroid/) App which developed by google.
+To learn more about this approach check out [modularization learning journey](https://github.com/android/nowinandroid/blob/main/docs/ArchitectureLearningJourney.md)
