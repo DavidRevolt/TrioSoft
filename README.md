@@ -43,4 +43,4 @@ To install this app, follow these steps:
 ## Modularization
 App modularization approach is very similar to [Now in Android](https://github.com/android/nowinandroid/) App which developed by google.
 
-To learn more about this approach check out [modularization learning journey](https://github.com/android/nowinandroid/blob/main/docs/ArchitectureLearningJourney.md)
+To learn more about this approach check out [modularization learning journey](https://github.com/android/nowinandroid/blob/main/docs/ArchitectureLearningJourney.md).
