@@ -1,7 +1,6 @@
 package com.davidrevolt.feature.home
 
 import android.icu.util.Calendar
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -89,7 +88,7 @@ fun HomeScreen(
                 )
                 Spacer(modifier = Modifier.size(10.dp))
                 AppFabButton(
-                    onFabClick = {viewModel.getWeatherByPlace("rehovot")},
+                    onFabClick = { viewModel.getWeatherByPlace("rehovot") },
                     icon = AppIcons.Location,
                     containerColor = MaterialTheme.colorScheme.secondary,
                     modifier = Modifier.size(40.dp)
@@ -108,13 +107,15 @@ fun HomeScreen(
         ) {
             Image(
                 painter = painterResource(id = homeBanner), contentDescription = "home banner",
-                modifier = Modifier.padding(top=30.dp).size(200.dp)
+                modifier = Modifier
+                    .padding(top = 30.dp)
+                    .size(200.dp)
             )
             when (uiState) {
                 is HomeUiState.Data -> {
                     val data = (uiState as HomeUiState.Data)
                     if (data.points.isNotEmpty())
-                        HomeScreenContent(data.points,data.isSyncing)
+                        HomeScreenContent(data.points, data.isSyncing)
                     else
                         Text("Nothing to show here...yet", color = Color.White)
                 }
@@ -126,7 +127,7 @@ fun HomeScreen(
 }
 
 @Composable
-private fun HomeScreenContent(points: List<Point>, isSyncing:Boolean) {
+private fun HomeScreenContent(points: List<Point>, isSyncing: Boolean) {
 
     IsSyncing(
         state = rememberIsSyncingState(isRefreshing = isSyncing),
@@ -141,19 +142,19 @@ private fun HomeScreenContent(points: List<Point>, isSyncing:Boolean) {
         ) {
             PointChart(points)
             // Cards
-                LazyRow(modifier = Modifier.padding(top = 20.dp,start= 10.dp, end = 10.dp)) {
-                    points.forEach { point ->
-                        item {
-                            PointColumn(
-                                modifier = Modifier.padding(3.dp),
-                                date = point.date,
-                                temp = point.temperature,
-                                humidity = point.humidity,
-                                color = Color.Black.copy(alpha = 0.6f)
-                            )
-                        }
+            LazyRow(modifier = Modifier.padding(top = 20.dp, start = 10.dp, end = 10.dp)) {
+                points.forEach { point ->
+                    item {
+                        PointColumn(
+                            modifier = Modifier.padding(3.dp),
+                            date = point.date,
+                            temp = point.temperature,
+                            humidity = point.humidity,
+                            color = Color.Black.copy(alpha = 0.6f)
+                        )
                     }
                 }
+            }
 
 
         }
@@ -219,13 +220,9 @@ fun CreatePointDialog(
                 calendar.set(Calendar.MINUTE, timePickerState.minute)
 
                 Button(onClick = {
-                    Log.i(
-                        "AppLog",
-                        "HomeScreen: Creating Point Clicked! -> Date: ${calendar.time}, Temperature: ${temperatureState.floatValue.toInt()}, Humidity: ${humidityState.floatValue.toInt()}"
-                    )
                     onSaveClick(
-                        temperatureState.floatValue.toInt(),
                         humidityState.floatValue.toInt(),
+                        temperatureState.floatValue.toInt(),
                         calendar.time
                     )
                     showCreatePointDialog.value = false
