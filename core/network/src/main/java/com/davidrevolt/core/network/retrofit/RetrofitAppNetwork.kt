@@ -8,7 +8,7 @@ import retrofit2.http.Query
 const val SECTIONS = "current"
 const val LANGUAGE = "en"
 const val UNITS = "metric"
-const val API_KEY = "322m78bslniu1kw0ol7ntvwddcp0abaqmr6twcwo"
+const val API_KEY = "INSERT METASOURCE API KEY HERE!!!"
 
 interface RetrofitAppNetwork {
     @GET(value = "api/v1/free/point?")
