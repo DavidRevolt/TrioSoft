@@ -36,7 +36,7 @@ To install this app, follow these steps:
 1. Clone or download the project code from the repository.
 2. Create Firebase project, download and place google-services.json file in App module.
 3. In Firebase console, enable: Authentication and Cloud Firestore.
-4. Get [MetaSource](https://www.meteosource.com/) api key and insert it in [RetrofitAppNetwork.kt](https://github.com/DavidRevolt/TrioSoft/blob/master/core/network/src/main/java/com/davidrevolt/core/network/retrofit/RetrofitAppNetwork.kt).
+4. Get [MetaSource](https://www.meteosource.com/) api key and insert it in [_RetrofitAppNetwork.kt_](https://github.com/DavidRevolt/TrioSoft/blob/master/core/network/src/main/java/com/davidrevolt/core/network/retrofit/RetrofitAppNetwork.kt).
 5. Build and run the app on an Android emulator or device.
 
 
@@ -44,3 +44,9 @@ To install this app, follow these steps:
 App modularization approach is very similar to [Now in Android](https://github.com/android/nowinandroid/) App which developed by google.
 
 To learn more about this approach check out [modularization learning journey](https://github.com/android/nowinandroid/blob/main/docs/ArchitectureLearningJourney.md).
+
+
+## Vico chart drawing limitations
+Vico chart library Drawing limitations:
+1. Must have at least 2 points to draw the graph.
+2. In some cases If the first point ever created is _Temperature:0°_, _Humidity:0%_, adding more points afterwards might not trigger graph drawing, in that case relaunching the app will fix the issue. 

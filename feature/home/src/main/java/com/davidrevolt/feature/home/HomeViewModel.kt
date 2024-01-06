@@ -62,7 +62,7 @@ class HomeViewModel @Inject constructor(
         viewModelScope.launch {
             try{
                 val weather = weatherRepository.getWeatherByPlace(placeId)
-                snackbarManager.snackbarMessage("The weather is $placeId is ${weather.description} ${weather.temperature}+$degree")
+                snackbarManager.snackbarMessage("The weather in $placeId is ${weather.description} ${weather.temperature}$degree")
             }catch (e:Exception){
                 snackbarManager.snackbarMessage("${e.message}")
             }

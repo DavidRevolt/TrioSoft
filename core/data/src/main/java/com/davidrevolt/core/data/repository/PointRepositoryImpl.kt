@@ -26,7 +26,11 @@ class PointRepositoryImpl @Inject constructor(
         pointDao.getPointEntities(userId = userId)
             .map { it.map(PointEntity::asExternalModel) }
 
-
+    /*
+    * When creating a new point with Firestore the point first added to a cache memory!
+    * The Firestore cache memory [regardless of the internet connection] sends data to ROOM DB in the sync() below.
+    * The Firestore cache memory update the data in the cloud when internet connection is available.
+    * */
     override suspend fun create(
         humidity: Int,
         temperature: Int,
@@ -47,11 +51,10 @@ class PointRepositoryImpl @Inject constructor(
         Log.d("AppLog", "Point repository is syncing")
         networkDataSource.getPoints(userId).collect { it ->
             it.map {
-                Log.d("AppLog", "Got Point ${it.id} from firestore/firestore cache, upsert in dao")
+                Log.d("AppLog", "Got Point ${it.id} from Firestore cache, upsert in dao")
                 pointDao.upsert(it.asEntity())
             }
         }
     }
-
 
 }

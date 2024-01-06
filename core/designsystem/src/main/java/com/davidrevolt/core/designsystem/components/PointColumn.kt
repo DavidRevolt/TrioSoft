@@ -23,6 +23,9 @@ import androidx.compose.ui.text.style.TextDirection
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 import kotlin.text.Typography.degree
 
 val dividerColor = Color.White.copy(alpha = 0.5f)
@@ -50,11 +53,13 @@ val tempAndHumidityStyle = TextStyle(
     fontSize = 20.sp,
 )
 
+val timeFormat = SimpleDateFormat("HH:mm", Locale.US)
+val dateFormat = SimpleDateFormat("MMM d, yyy", Locale.US)
+
 @Composable
 fun PointColumn(
     modifier: Modifier = Modifier,
-    dayMonth: String,
-    year: String,
+    date: Date,
     temp: Int,
     humidity: Int,
     color: Color = containerColor
@@ -81,14 +86,14 @@ fun PointColumn(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = year,
+                    text = dateFormat.format(date),
                     style = yearStyle,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,
                 )
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = dayMonth,
+                    text = timeFormat.format(date),
                     style = dayMonthStyle,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis,

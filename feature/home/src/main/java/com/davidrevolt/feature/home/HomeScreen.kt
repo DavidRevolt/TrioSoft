@@ -2,6 +2,7 @@ package com.davidrevolt.feature.home
 
 import android.icu.util.Calendar
 import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,8 +16,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DisplayMode
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -36,24 +35,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.davidrevolt.core.designsystem.colors.blackScrim
 import com.davidrevolt.core.designsystem.components.AppFabButton
 import com.davidrevolt.core.designsystem.components.AppSlider
 import com.davidrevolt.core.designsystem.components.LoadingWheel
 import com.davidrevolt.core.designsystem.components.PointColumn
+import com.davidrevolt.core.designsystem.drawable.homeBanner
 import com.davidrevolt.core.designsystem.icons.AppIcons
 import com.davidrevolt.core.designsystem.isSyncing.IsSyncing
 import com.davidrevolt.core.designsystem.isSyncing.rememberIsSyncingState
 import com.davidrevolt.core.model.Point
 import com.davidrevolt.feature.home.chart.PointChart
-import java.text.SimpleDateFormat
 import java.util.Date
-import java.util.Locale
 import kotlin.text.Typography.degree
 
 
@@ -90,6 +88,13 @@ fun HomeScreen(
                     modifier = Modifier.size(40.dp)
                 )
                 Spacer(modifier = Modifier.size(10.dp))
+                AppFabButton(
+                    onFabClick = {viewModel.getWeatherByPlace("rehovot")},
+                    icon = AppIcons.Location,
+                    containerColor = MaterialTheme.colorScheme.secondary,
+                    modifier = Modifier.size(40.dp)
+                )
+                Spacer(modifier = Modifier.size(10.dp))
                 AppFabButton(onFabClick = onMainFabClick, icon = AppIcons.Add)
             }
 
@@ -101,6 +106,10 @@ fun HomeScreen(
                 .padding(innerPadding),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            Image(
+                painter = painterResource(id = homeBanner), contentDescription = "home banner",
+                modifier = Modifier.padding(top=30.dp).size(200.dp)
+            )
             when (uiState) {
                 is HomeUiState.Data -> {
                     val data = (uiState as HomeUiState.Data)
@@ -108,9 +117,6 @@ fun HomeScreen(
                         HomeScreenContent(data.points,data.isSyncing)
                     else
                         Text("Nothing to show here...yet", color = Color.White)
-                    Button(onClick = {viewModel.getWeatherByPlace("rehovot")}){
-                        Text("Test")
-                    }
                 }
 
                 is HomeUiState.Loading -> LoadingWheel()
@@ -121,8 +127,7 @@ fun HomeScreen(
 
 @Composable
 private fun HomeScreenContent(points: List<Point>, isSyncing:Boolean) {
-    val yearFormat = SimpleDateFormat("yyyy", Locale.US)
-    val dayMonthFormat = SimpleDateFormat("MMM d", Locale.US)
+
     IsSyncing(
         state = rememberIsSyncingState(isRefreshing = isSyncing),
         onRefresh = {},
@@ -130,27 +135,26 @@ private fun HomeScreenContent(points: List<Point>, isSyncing:Boolean) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 30.dp),
+                .padding(top = 20.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
+            PointChart(points)
             // Cards
-            Card(colors = CardDefaults.cardColors(containerColor = blackScrim)) {
-                LazyRow(modifier = Modifier.padding(10.dp)) {
+                LazyRow(modifier = Modifier.padding(top = 20.dp,start= 10.dp, end = 10.dp)) {
                     points.forEach { point ->
                         item {
                             PointColumn(
                                 modifier = Modifier.padding(3.dp),
-                                dayMonth = dayMonthFormat.format(point.date),
-                                year = yearFormat.format(point.date),
+                                date = point.date,
                                 temp = point.temperature,
-                                humidity = point.humidity
+                                humidity = point.humidity,
+                                color = Color.Black.copy(alpha = 0.6f)
                             )
                         }
                     }
                 }
-            }
-            PointChart(points)
+
 
         }
     }
