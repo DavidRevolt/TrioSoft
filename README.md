@@ -31,7 +31,7 @@ Example of Android app built entirely with Kotlin and Jetpack Compose, the app f
 - [Vico](https://github.com/patrykandpatrick/vico) - Chart library for Android.
 
 
-## Setup Requirement
+## Setup Requirements
 To install this app, follow these steps:
 1. Clone or download the project code from the repository.
 2. Create Firebase project, download and place google-services.json file in App module.
