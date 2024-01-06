@@ -64,7 +64,7 @@ class HomeViewModel @Inject constructor(
                 val weather = weatherRepository.getWeatherByPlace(placeId)
                 snackbarManager.snackbarMessage("The weather in $placeId is ${weather.description} ${weather.temperature}$degree")
             }catch (e:Exception){
-                snackbarManager.snackbarMessage("${e.message}")
+                snackbarManager.snackbarMessage("Unable to fetch weather data right now...")
             }
         }
     }

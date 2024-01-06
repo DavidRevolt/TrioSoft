@@ -32,7 +32,7 @@ class LoginViewModel @Inject constructor(
                 Log.i("AppLog","User Authenticated")
             }catch (e:Exception){
                 Log.e("AppLog","${e.message}")
-                snackbarManager.snackbarMessage("Unable to fetch weather data right now...")
+                snackbarManager.snackbarMessage("${e.message}")
             }
         }
     }
