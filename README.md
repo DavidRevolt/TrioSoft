@@ -50,3 +50,8 @@ To learn more about this approach check out [modularization learning journey](ht
 Vico chart library Drawing limitations:
 1. Must have at least 2 points to draw the graph.
 2. In some cases If the first point ever created is _Temperature:0°_, _Humidity:0%_, adding more points afterwards might not trigger graph drawing, in that case relaunching the app will fix this issue. 
+
+
+## Demo
+https://github.com/DavidRevolt/TrioSoft/assets/59780440/789f1321-11c9-4060-8098-ee49354e0b04
+
